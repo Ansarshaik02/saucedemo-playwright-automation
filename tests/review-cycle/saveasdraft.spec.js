@@ -9,17 +9,17 @@ test.describe.serial('Save as Draft – Review Cycle Flow', () => {
     await page.goto(BASE_URL);
     await page.waitForTimeout(1500);
   });
-//================= TC01 & TC02 =================
+
 test('TC01 & TC02 - Verify user can save a review cycle as draft from Verify page and button visibility validation', async ({ page }) => {
     
 
-    // -------------------- NAVIGATE TO REVIEWS --------------------
+   
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
     await expect(reviewsNav).toBeVisible();
     await reviewsNav.click();
     await page.waitForTimeout(1500);
 
-    // -------------------- CREATE NEW CYCLE --------------------
+    
     const createNewCycleBtn = page.getByRole('button', { name: 'Create New Cycle' });
     await expect(createNewCycleBtn).toBeVisible();
     await createNewCycleBtn.click();
@@ -31,14 +31,14 @@ test('TC01 & TC02 - Verify user can save a review cycle as draft from Verify pag
 
     await page.waitForTimeout(1000);
 
-    // -------------------- STEP 1: TITLE --------------------
+    
     const titleInput = page.locator('#review-name');
     await expect(titleInput).toBeVisible();
     await titleInput.fill('TC01 Draft Review Cycle');
 
     await page.waitForTimeout(800);
 
-    // TC02: Verify "Save as Draft" button is NOT visible on Title step
+    
     const saveAsDraftBtn = page.getByRole('button', { name: 'Save as Draft' });
     try {
       await expect(saveAsDraftBtn).toBeHidden();
@@ -50,14 +50,14 @@ test('TC01 & TC02 - Verify user can save a review cycle as draft from Verify pag
     const saveAndContinueBtn = page.getByRole('button', { name: 'Save & Continue' });
     await saveAndContinueBtn.click();
 
-    // -------------------- STEP 2: CONFIG --------------------
+    
     await expect(
       page.getByText('Configure steps of this review cycle')
     ).toBeVisible();
 
     await page.waitForTimeout(1000);
 
-    // TC02: Verify "Save as Draft" button is NOT visible on Config step
+    
     try {
       await expect(saveAsDraftBtn).toBeHidden();
       console.log('✅ TC02: Save as Draft button correctly hidden on Config step');
@@ -78,14 +78,14 @@ test('TC01 & TC02 - Verify user can save a review cycle as draft from Verify pag
 
     await page.waitForTimeout(1200);
 
-    // -------------------- STEP 3: FORMS --------------------
+    
     await expect(
       page.getByText('Create customizable review forms with relevant questions')
     ).toBeVisible();
 
     await page.waitForTimeout(1000);
 
-    // TC02: Verify "Save as Draft" button is NOT visible on Forms step
+    
     try {
       await expect(saveAsDraftBtn).toBeHidden();
       console.log('✅ TC02: Save as Draft button correctly hidden on Forms step');
@@ -93,7 +93,7 @@ test('TC01 & TC02 - Verify user can save a review cycle as draft from Verify pag
       console.log('⚠️ TC02: Save as Draft button visibility check on Forms step - continuing test');
     }
 
-    // ==================== SELF REVIEW FORM ===================
+    
     console.log('Creating Self Review Form');
 
     await page.getByRole('button', { name: 'Create Form' }).first().click();
@@ -119,7 +119,7 @@ test('TC01 & TC02 - Verify user can save a review cycle as draft from Verify pag
 
     await page.waitForTimeout(1200);
 
-    // ==================== PEER REVIEW FORM ====================
+    
 console.log('Creating Peer Review Form');
 
 await page.getByRole('button', { name: 'Create Form' }).first().click();
@@ -128,30 +128,30 @@ await page.waitForTimeout(800);
 await page.getByRole('button', { name: 'Create From Scratch' }).click();
 await page.waitForTimeout(800);
 
-// ✅ Add question (mandatory)
+
 await page.getByRole('button', { name: 'Add' }).first().click();
 await page.waitForTimeout(500);
 
-// Peer review auto-adds question
+
 await page.getByRole('button', { name: 'Add' }).nth(1).click();
 await page.waitForTimeout(500);
 
-// Exit form builder → back to Forms page
+
 await saveAndContinueBtn.scrollIntoViewIfNeeded();
 await saveAndContinueBtn.click();
 await page.waitForTimeout(2000);
 
-    // Now Forms page → Save & Continue to Reviewees
+    
     await saveAndContinueBtn.click();
 
- // -------------------- STEP 4: REVIEWEES --------------------
+ 
 
-// Wait for Reviewees page
+
 await expect(
   page.getByText('Select reviewees who will be a part of this review.')
 ).toBeVisible();
 
-// TC02: Verify "Save as Draft" button is NOT visible on Reviewees step
+
 try {
   await expect(saveAsDraftBtn).toBeHidden();
   console.log('✅ TC02: Save as Draft button correctly hidden on Reviewees step');
@@ -159,17 +159,17 @@ try {
   console.log('⚠️ TC02: Save as Draft button visibility check on Reviewees step - continuing test');
 }
 
-// Small visual pause
+
 await page.waitForTimeout(800);
 
-// -------------------- STEP 4: REVIEWEES --------------------
+
 await expect(
   page.getByText('Select reviewees who will be a part of this review.')
 ).toBeVisible();
 
 await page.waitForTimeout(800);
 
-// Add multiple reviewees using standard locators (server-independent)
+
 await page.getByRole('button', { name: 'plus' }).first().click();
 await page.waitForTimeout(300);
 
@@ -182,34 +182,34 @@ await page.waitForTimeout(300);
 await page.getByRole('button', { name: 'plus' }).nth(3).click();
 await page.waitForTimeout(300);
 
-// Fallback / extra add (as provided)
+
 await page
   .locator('div:nth-child(7) > .grid-row > .add-button-wrapper > div > .ant-btn')
   .click();
 
-// Save & Continue → Reviewers
+
 await saveAndContinueBtn.scrollIntoViewIfNeeded();
 await saveAndContinueBtn.click();
 
 
-// Assertion: moved to Reviewers step
-await expect(
-  page.getByText('Verify Reviewers in this review cycle')
-).toBeVisible();
-
-
-// -------------------- STEP 5: REVIEWERS --------------------
 
 await expect(
   page.getByText('Verify Reviewers in this review cycle')
 ).toBeVisible();
 
-// TC02: Verify "Save as Draft" button is NOT visible on Reviewers step
+
+
+
+await expect(
+  page.getByText('Verify Reviewers in this review cycle')
+).toBeVisible();
+
+
 try {
   await expect(saveAsDraftBtn).toBeHidden();
   console.log('✅ TC02: Save as Draft button correctly hidden on Reviewers step');
 } catch (error) {
-  console.log('⚠️ TC02: Save as Draft button visibility check on Reviewers step - continuing test');
+  console.log(' TC02: Save as Draft button visibility check on Reviewers step - continuing test');
 }
 
 await page.waitForTimeout(1000);
@@ -229,7 +229,7 @@ await page
 
 await page.waitForTimeout(500);
 
-// Select first reviewer from list
+
 await page.$$('.fw-500.fs-smedium.ellipsis')
   .then(elements => elements[0].click());
 
@@ -263,13 +263,13 @@ await page.waitForTimeout(1500);
 
 
 
-// -------------------- STEP 6: VERIFY --------------------
+
 
 await expect(
   page.getByText('You are good to go. Just review your choices and you are good to go.')
 ).toBeVisible();
 
-// TC02: Verify "Save as Draft" button IS visible on Verify step
+
 try {
   await expect(saveAsDraftBtn).toBeVisible();
   console.log('✅ TC02: Save as Draft button correctly visible on Verify step');
@@ -290,19 +290,18 @@ console.log('✅ Review cycle saved as Draft successfully');
 
 
   });
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ================= TC03 =================
 test('TC03 - Verify user can save draft without completing mandatory steps using stepper navigation', async ({ page }) => {
     test.setTimeout(90000)
     
 
-    // -------------------- NAVIGATE TO REVIEWS --------------------
+    
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
     await expect(reviewsNav).toBeVisible();
     await reviewsNav.click();
     await page.waitForTimeout(1500);
 
-    // -------------------- CREATE NEW CYCLE --------------------
+    
     const createNewCycleBtn = page.getByRole('button', { name: 'Create New Cycle' });
     await expect(createNewCycleBtn).toBeVisible();
     await createNewCycleBtn.click();
@@ -314,17 +313,17 @@ test('TC03 - Verify user can save draft without completing mandatory steps using
 
     await page.waitForTimeout(1000);
 
-    // -------------------- STEP 1: TITLE --------------------
+    
     await page.getByText('1').click(); // Title step
     await page.getByRole('textbox', { name: 'Title *' }).fill('TC03 Draft Review Cycle');
     await page.getByRole('button', { name: 'Save & Continue' }).click();
 
     await page.waitForTimeout(1000);
 
-    // -------------------- SKIP TO STEP 6: VERIFY --------------------
+    
     await page.getByText('6').click(); // Verify step
 
-    // -------------------- ASSERTIONS ON VERIFY PAGE --------------------
+    
     await expect(
       page.getByText('You are good to go. Just review your choices and you are good to go.')
     ).toBeVisible();
@@ -332,14 +331,12 @@ test('TC03 - Verify user can save draft without completing mandatory steps using
     const saveAsDraftBtn = page.getByRole('button', { name: 'Save as Draft' });
     await expect(saveAsDraftBtn).toBeVisible();
 
-    // -------------------- ACTION: SAVE AS DRAFT --------------------
+    
     await saveAsDraftBtn.click();
 
     await page.waitForTimeout(1500);
 
-    // -------------------- FINAL ASSERTIONS --------------------
-
-    // Verify review cycle is saved successfully as Draft - use first occurrence to avoid strict mode violation
+    
     await expect(
       page.getByText('TC03 Draft Review Cycle').first()
     ).toBeVisible();
@@ -438,10 +435,7 @@ test('TC04 - Verify draft retains all configured data after saving', async ({ pa
     await saveAsDraftBtn.click();
     await page.waitForTimeout(1500);
 
-    // -----
-
-    // -------------------- DRAFT REOPEN & VALIDATION --------------------
-    // Open the draft review cycle using the cycle name - use first occurrence to avoid strict mode violation
+    
     await page.getByText(cycleName).first().click();
     await page.waitForTimeout(1500);
 
