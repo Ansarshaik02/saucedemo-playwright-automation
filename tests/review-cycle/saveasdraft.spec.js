@@ -1,17 +1,17 @@
 import { test, expect } from '@playwright/test';
+const BASE_URL =
+  'https://api.demo.peoplebox.ai/demo/try_interactive_demo?account_id=1147';
 
 test.describe.serial('Save as Draft – Review Cycle Flow', () => {
+
+   test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(BASE_URL);
+    await page.waitForTimeout(1500);
+  });
 //================= TC01 & TC02 =================
 test('TC01 & TC02 - Verify user can save a review cycle as draft from Verify page and button visibility validation', async ({ page }) => {
-    test.setTimeout(90000)
-    // -------------------- VISUAL STABILITY --------------------
-    await page.setViewportSize({ width: 1440, height: 900 });
-
-    // -------------------- DASHBOARD --------------------
-    await page.goto(
-      'https://api.demo.peoplebox.ai/demo/try_interactive_demo?account_id=1147'
-    );
-    await page.waitForTimeout(1500);
+    
 
     // -------------------- NAVIGATE TO REVIEWS --------------------
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
@@ -294,14 +294,7 @@ console.log('✅ Review cycle saved as Draft successfully');
 // ================= TC03 =================
 test('TC03 - Verify user can save draft without completing mandatory steps using stepper navigation', async ({ page }) => {
     test.setTimeout(90000)
-    // -------------------- VISUAL STABILITY --------------------
-    await page.setViewportSize({ width: 1440, height: 900 });
-
-    // -------------------- DASHBOARD --------------------
-    await page.goto(
-      'https://api.demo.peoplebox.ai/demo/try_interactive_demo?account_id=1147'
-    );
-    await page.waitForTimeout(1500);
+    
 
     // -------------------- NAVIGATE TO REVIEWS --------------------
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
@@ -359,14 +352,7 @@ test('TC03 - Verify user can save draft without completing mandatory steps using
 // ================= TC04 =================
 test('TC04 - Verify draft retains all configured data after saving', async ({ page }) => {
     test.setTimeout(90000)
-    // -------------------- VISUAL STABILITY --------------------
-    await page.setViewportSize({ width: 1440, height: 900 });
-
-    // -------------------- DASHBOARD --------------------
-    await page.goto(
-      'https://api.demo.peoplebox.ai/demo/try_interactive_demo?account_id=1147'
-    );
-    await page.waitForTimeout(1500);
+    
 
     // -------------------- NAVIGATE TO REVIEWS --------------------
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
@@ -486,15 +472,8 @@ test('TC04 - Verify draft retains all configured data after saving', async ({ pa
 
 // ================= TC05 =================
 test('TC05 - Verify user can resume editing a draft review cycle', async ({ page }) => {
-    test.setTimeout(30000)
-    // -------------------- VISUAL STABILITY --------------------
-    await page.setViewportSize({ width: 1440, height: 900 });
-
-    // -------------------- DASHBOARD --------------------
-    await page.goto(
-      'https://api.demo.peoplebox.ai/demo/try_interactive_demo?account_id=1147'
-    );
-    await page.waitForTimeout(1500);
+    test.setTimeout(90000)
+    
 
     // -------------------- NAVIGATE TO REVIEWS --------------------
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
@@ -577,14 +556,7 @@ test('TC05 - Verify user can resume editing a draft review cycle', async ({ page
 // ================= TC06 & TC07=================
 test('TC06 & TC07 - Validate explicit creation behavior and prevention of unintended draft auto-save', async ({ page }) => {
     test.setTimeout(90000)
-    // -------------------- VISUAL STABILITY --------------------
-    await page.setViewportSize({ width: 1440, height: 900 });
-
-    // -------------------- DASHBOARD --------------------
-    await page.goto(
-      'https://api.demo.peoplebox.ai/demo/try_interactive_demo?account_id=1147'
-    );
-    await page.waitForTimeout(1500);
+    
 
     // -------------------- NAVIGATE TO REVIEWS --------------------
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
@@ -814,14 +786,7 @@ await expect(
 // ================= TC08 =================
 test('TC08 - Verify exit from create flow without saving does not create draft', async ({ page }) => {
     test.setTimeout(90000)
-    // -------------------- VISUAL STABILITY --------------------
-    await page.setViewportSize({ width: 1440, height: 900 });
-
-    // -------------------- DASHBOARD --------------------
-    await page.goto(
-      'https://api.demo.peoplebox.ai/demo/try_interactive_demo?account_id=1147'
-    );
-    await page.waitForTimeout(1500);
+    
 
     // -------------------- NAVIGATE TO REVIEWS --------------------
     const reviewsNav = page.getByRole('link', { name: 'Reviews', exact: true });
